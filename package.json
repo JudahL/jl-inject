@@ -1,0 +1,15 @@
+{
+  "name": "jl-inject",
+  "version": "1.0.0",
+  "description": "A dependency injection framework by Judah Lucas",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JudahL/jl-inject.git"
+  },
+  "author": "Judah Lucas",
+  "license": "MIT"
+}
