@@ -4,12 +4,16 @@
   "description": "A dependency injection framework by Judah Lucas",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "test": "npx jest",
+    "test:watch": "npx jest --watchAll"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/JudahL/jl-inject.git"
   },
   "author": "Judah Lucas",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^23.5.0"
+  }
 }
