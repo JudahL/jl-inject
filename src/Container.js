@@ -2,19 +2,36 @@ const Binding = require('./Binding');
 
 /** Class representing a DI Container */
 class Container {
-  /** Creates a new DI Container */
-  constructor() {
+  /** 
+   * Creates a new DI Container
+   * @param {function} Binder - The Binder constructor to use for creating new bindings
+   */
+  constructor(Binder) {
+    this.Binder = Binder;
+
+    /** @type {Object<string, Binding>} */
     this.bindings = new Map();
   }
 
   /**
-   * Creates a new binding
+   * Creates a new binding using a Binder
    * @param {string} type - The binding type key
-   * @param {function} resolution - The constructor to resolve with
-   * @param {string[]} dependencies - The dependency type keys
    */
-  bind(type, resolution, dependencies) {
-    this.bindings.set(type, new Binding(resolution, dependencies));
+  bind(type) {
+    if (this.hasBinding(type)) {
+      throw new Error('Type already bound');
+    }
+
+    return new this.Binder(this, type);
+  }
+
+  /**
+   * Adds a new binding, should only be called by a binder
+   * @param {string} type - The binding type key
+   * @param {Binding} binding - The binding instance
+   */
+  addBinding(type, binding) {
+    this.bindings.set(type, binding);
   }
 
   /**
@@ -30,10 +47,11 @@ class Container {
    * @param {string} type - The dependency type to be resolved
    */
   resolveBinding(type) {
+    /** @type {Binding} */
     const binding = this.bindings.get(type);
 
     if (!binding) {
-      throw new Error('binding not defined');
+      throw new Error('binding not defined: ' + type);
     }
 
     return binding.resolve(this);
@@ -44,7 +62,7 @@ class Container {
    * @param {string[]} dependencies - The dependency types to be resolved
    */
   resolveDependencies(dependencies) {
-    if (!dependencies) return [];
+    if (!dependencies || !dependencies.map) return [];
 
     const resolvedDependencies = dependencies.map(dep => this.resolveBinding(dep));
     return resolvedDependencies;
