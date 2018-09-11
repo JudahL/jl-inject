@@ -8,6 +8,12 @@ describe('Container', () => {
     expect(Container).toBeDefined();
   });
 
+  it('can accept a Binder constructor as a constructor argument', () => {
+    const container = new Container(TestBinder);
+
+    expect(new container.Binder() instanceof TestBinder).toBe(true);
+  });
+
   describe('Container.addBinding', () => {
     it('can add a new binding', () => {
       const container = new Container();

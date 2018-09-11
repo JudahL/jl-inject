@@ -1,3 +1,3 @@
 # jl-inject
 
-A simple dependency injection framework for JavaScript by Judah Lucas.
+A lightweight dependency injection framework for JavaScript by Judah Lucas.

@@ -25,7 +25,7 @@ class Binder {
     this.container.addBinding(this.type, this.binding);
 
     //Return a resolve type setter object with methods for setting the type on the binding
-    return asSetter(this.binding);
+    return resolveTypeSetter(this.binding);
   }
 }
 
@@ -33,7 +33,7 @@ class Binder {
  * Returns an object that has methods for setting the resolve type on a Binding, to be called by the user after to() has been called
  * @param {Binding} binding - The binding to set the resolve type on
  */
-function asSetter(binding) {
+function resolveTypeSetter(binding) {
   return ({
     asSingleInstance: function () {
       binding.setAsSingleInstance();

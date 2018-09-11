@@ -30,8 +30,8 @@ class Binding {
   }
 
   /** Returns whether the binding is set to always reuse a previously resolved instance if possible */
-  isSingleton() {
-    return this.type === this.types.singleton;
+  isSingle() {
+    return this.type === this.types.single;
   }
 
   /**
